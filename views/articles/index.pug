@@ -1,0 +1,17 @@
+extends ../layout
+block content
+    div
+    h1.font-bold.ml-8 Liste des Articles
+
+    each article in articles
+        div.p-8
+            div.p-4.bg-white.flex.flex-col.gap-y-4.shadow-xl.rounded-xl
+                div.border-2.p-2
+                    h2 Titre de l'article
+                    p= article.title    
+                div.border-2.p-2
+                    h2 contenu de l'article
+                    p= article.content
+                p Date de création: #{new Date(article.createdAt).toLocaleDateString('fr')}
+                a(href=`/articles/${article.id}`).text-blue-500 Lien de l'article
+                hr

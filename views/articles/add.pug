@@ -1,0 +1,11 @@
+block content
+  h1 Ajouter un Article
+
+  form(action="/articles/add" method="POST")
+    label(for="title") Titre :
+    input(type="text" id="title" name="title" required)
+
+    label(for="content") Contenu :
+    textarea(id="content" name="content" required)
+
+    button(type="submit") Ajouter l'article

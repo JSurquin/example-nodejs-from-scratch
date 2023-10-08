@@ -1,0 +1,10 @@
+html
+  head
+    title= pageTitle
+    link(href="/styles/style.css", rel="stylesheet")
+    link(href="/styles/style_custom.css", rel="stylesheet")
+  body#page
+    include partials/navbar
+    div#content
+        block content
+    include partials/footer

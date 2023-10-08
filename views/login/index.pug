@@ -1,0 +1,20 @@
+html
+  head
+    title= pageTitle
+    link(href="../styles/style.css", rel="stylesheet")
+    link(href="../styles/style_custom.css", rel="stylesheet")
+block content
+    div.flex.h-screen.flex-col.justify-center.items-center
+        div.bg-white.shadow-xl.rounded-xl.p-4.flex.flex-col
+            h1.mb-4 Se connecter
+            form(action="/auth/login" method="POST").flex.flex-col
+                label(for="username") Nom d'utilisateur:
+                input(type="text" id="username" name="username" required).p-2.rounded-lg.border-2
+
+                label(for="password") Mot de passe:
+                input(type="password" id="password" name="password" required).p-2.rounded-lg.border-2
+
+                button(type="submit").mt-4.rounded-full.bg-green-500.text-white.p-3 Se connecter
+        block content
+            if messages.error
+                p.text-red-500.mt-4= messages.error

@@ -1,0 +1,27 @@
+version: "3.1"
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+# REVENIR SUR CE SUJET APRÈS C'EST IMPORTANT À DEBRIEF
+
+# en clair ce qui se passe c'est que mes deux services
+# j'ai Mongo et Mongo Express, mon service Mongo Express comme la base de données
+# Mongo n'est pas encore initialisée alors que j'ai lancé le Docker Compose, Mongo Express me dit, erreur je peux pas me connecter à quelque chose que je ne trouve pas qui n'existe pas et en fait pour corriger ça il faut mettre restart always pour les deux, ce qui veut dire que Mongo Express il va redémarrer grâce à restart et cette fois ci la base de données Mongo existent.
+
+# Vous voilà l'explication.
