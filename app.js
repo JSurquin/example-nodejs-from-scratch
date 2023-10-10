@@ -15,7 +15,7 @@ const port = 3000;
 
 // Configuration de la connexion à MongoDB
 mongoose.connect(
-  "mongodb://root:example@localhost:27017/blog?authSource=admin",
+  `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER_URL}/blog?authSource=admin`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
