@@ -1,20 +1,12 @@
 const express = require("express");
 const router = express.Router();
-
+const jwt = require("jsonwebtoken");
 // Importez votre modèle d'article MongoDB ici
 const Article = require("../models/articleModel");
-
-// Middleware pour vérifier si l'utilisateur est authentifié
-const isAuthenticated = (req, res, next) => {
-  console.log("req.user", req.user);
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/auth/login");
-};
+const isAuthenticatedWithJWT = require("../middlewares/authMiddleware");
 
 // Route pour afficher tous les articles
-router.get("/", isAuthenticated, async (req, res) => {
+router.get("/", isAuthenticatedWithJWT, async (req, res) => {
   try {
     const articles = await Article.find();
     res.render("articles/index", { articles });
@@ -25,12 +17,12 @@ router.get("/", isAuthenticated, async (req, res) => {
 });
 
 // Route pour afficher le formulaire d'ajout d'article
-router.get("/add", isAuthenticated, (req, res) => {
+router.get("/add", isAuthenticatedWithJWT, (req, res) => {
   res.render("articles/add");
 });
 
 // Route pour afficher un article individuel
-router.get("/:id", isAuthenticated, async (req, res) => {
+router.get("/:id", isAuthenticatedWithJWT, async (req, res) => {
   try {
     const article = await Article.findById(req.params.id);
     res.render("articles/show", { article });
@@ -41,7 +33,7 @@ router.get("/:id", isAuthenticated, async (req, res) => {
 });
 
 // Route pour traiter le formulaire d'ajout d'article
-router.post("/add", isAuthenticated, async (req, res) => {
+router.post("/add", isAuthenticatedWithJWT, async (req, res) => {
   const { title, content } = req.body;
 
   try {
