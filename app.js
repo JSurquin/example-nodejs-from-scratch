@@ -39,6 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Configuration du moteur de vue Pug
 app.set("view engine", "pug");
 app.use(express.static("public"));
+app.set("views", "./blog/views");
 
 // Importation des routes
 const homeRoutes = require("./blog/routes/homeRoute.js");
